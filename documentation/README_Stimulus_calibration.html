@@ -1,0 +1,330 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>Stimulus calibration.md</title><link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext' rel='stylesheet' type='text/css'><style type='text/css'>html, body {overflow-x: initial !important;}.CodeMirror { height: auto; }
+.CodeMirror-scroll { overflow-y: hidden; overflow-x: auto; }
+.CodeMirror-lines { padding: 4px 0px; }
+.CodeMirror pre { }
+.CodeMirror-scrollbar-filler, .CodeMirror-gutter-filler { background-color: white; }
+.CodeMirror-gutters { border-right: 1px solid rgb(221, 221, 221); background-color: rgb(247, 247, 247); white-space: nowrap; }
+.CodeMirror-linenumbers { }
+.CodeMirror-linenumber { padding: 0px 3px 0px 5px; text-align: right; color: rgb(153, 153, 153); }
+.CodeMirror div.CodeMirror-cursor { border-left: 1px solid black; z-index: 3; }
+.CodeMirror div.CodeMirror-secondarycursor { border-left: 1px solid silver; }
+.CodeMirror.cm-keymap-fat-cursor div.CodeMirror-cursor { width: auto; border: 0px; background: rgb(119, 238, 119); z-index: 1; }
+.CodeMirror div.CodeMirror-cursor.CodeMirror-overwrite { }
+.cm-tab { display: inline-block; }
+.cm-s-typora-default .cm-header, .cm-s-typora-default .cm-property { color: rgb(217, 79, 138); }
+.cm-s-typora-default pre.cm-header1:not(.cm-atom) :not(.cm-overlay) { font-size: 2rem; line-height: 2rem; }
+.cm-s-typora-default pre.cm-header2:not(.cm-atom) :not(.cm-overlay) { font-size: 1.4rem; line-height: 1.4rem; }
+.cm-s-typora-default .cm-atom, .cm-s-typora-default .cm-number { color: rgb(149, 132, 134); }
+.cm-s-typora-default .cm-table-row, .cm-s-typora-default .cm-block-start { font-family: monospace; }
+.cm-s-typora-default .cm-comment, .cm-s-typora-default .cm-code { color: rgb(74, 90, 159); font-family: monospace; }
+.cm-s-typora-default .cm-tag { color: rgb(169, 68, 66); }
+.cm-s-typora-default .cm-string { color: rgb(126, 134, 169); }
+.cm-s-typora-default .cm-link { color: rgb(196, 122, 15); text-decoration: underline; }
+.cm-s-typora-default .cm-variable-2, .cm-s-typora-default .cm-variable-1 { color: inherit; }
+.cm-s-typora-default .cm-overlay { font-size: 1rem; font-family: monospace; }
+.CodeMirror.cm-s-typora-default div.CodeMirror-cursor { border-left: 3px solid rgb(228, 98, 154); }
+.cm-s-typora-default .CodeMirror-activeline-background { left: -60px; right: -30px; background: rgba(204, 204, 204, 0.2); }
+.cm-s-typora-default .CodeMirror-gutters { border-right: none; background-color: inherit; }
+.cm-s-typora-default .cm-trailing-space-new-line::after, .cm-startspace::after, .cm-starttab .cm-tab::after { content: "•"; position: absolute; left: 0px; opacity: 0; font-family: LetterGothicStd, monospace; }
+.os-windows .cm-startspace::after, .os-windows .cm-starttab .cm-tab::after { left: -0.1em; }
+.cm-starttab .cm-tab::after { content: " "; }
+.cm-startspace, .cm-tab, .cm-starttab, .cm-trailing-space-a, .cm-trailing-space-b, .cm-trailing-space-new-line { font-family: monospace; position: relative; }
+.cm-s-typora-default .cm-trailing-space-new-line::after { content: "↓"; opacity: 0.3; }
+.cm-s-inner .cm-keyword { color: rgb(119, 0, 136); }
+.cm-s-inner .cm-atom, .cm-s-inner.cm-atom { color: rgb(34, 17, 153); }
+.cm-s-inner .cm-number { color: rgb(17, 102, 68); }
+.cm-s-inner .cm-def { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-variable { color: black; }
+.cm-s-inner .cm-variable-2 { color: rgb(0, 85, 170); }
+.cm-s-inner .cm-variable-3 { color: rgb(0, 136, 85); }
+.cm-s-inner .cm-property { color: black; }
+.cm-s-inner .cm-operator { color: rgb(152, 26, 26); }
+.cm-s-inner .cm-comment, .cm-s-inner.cm-comment { color: rgb(170, 85, 0); }
+.cm-s-inner .cm-string { color: rgb(170, 17, 17); }
+.cm-s-inner .cm-string-2 { color: rgb(255, 85, 0); }
+.cm-s-inner .cm-meta { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-qualifier { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-builtin { color: rgb(51, 0, 170); }
+.cm-s-inner .cm-bracket { color: rgb(153, 153, 119); }
+.cm-s-inner .cm-tag { color: rgb(17, 119, 0); }
+.cm-s-inner .cm-attribute { color: rgb(0, 0, 204); }
+.cm-s-inner .cm-header, .cm-s-inner.cm-header { color: blue; }
+.cm-s-inner .cm-quote, .cm-s-inner.cm-quote { color: rgb(0, 153, 0); }
+.cm-s-inner .cm-hr, .cm-s-inner.cm-hr { color: rgb(153, 153, 153); }
+.cm-s-inner .cm-link, .cm-s-inner.cm-link { color: rgb(0, 0, 204); }
+.cm-negative { color: rgb(221, 68, 68); }
+.cm-positive { color: rgb(34, 153, 34); }
+.cm-header, .cm-strong { font-weight: bold; }
+.cm-del { text-decoration: line-through; }
+.cm-em { font-style: italic; }
+.cm-link { text-decoration: underline; }
+.cm-error { color: rgb(255, 0, 0); }
+.cm-invalidchar { color: rgb(255, 0, 0); }
+.cm-constant { color: rgb(38, 139, 210); }
+.cm-defined { color: rgb(181, 137, 0); }
+div.CodeMirror span.CodeMirror-matchingbracket { color: rgb(0, 255, 0); }
+div.CodeMirror span.CodeMirror-nonmatchingbracket { color: rgb(255, 34, 34); }
+.cm-s-inner .CodeMirror-activeline-background { background: inherit; }
+.CodeMirror { position: relative; overflow: hidden; }
+.CodeMirror-scroll { margin-bottom: -30px; margin-right: -30px; padding-bottom: 30px; padding-right: 30px; height: 100%; outline: none; position: relative; box-sizing: content-box; }
+.CodeMirror-sizer { position: relative; }
+.CodeMirror-vscrollbar, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-gutter-filler { position: absolute; z-index: 6; display: none; }
+.CodeMirror-vscrollbar { right: 0px; top: 0px; overflow-x: hidden; overflow-y: scroll; }
+.CodeMirror-hscrollbar { bottom: 0px; left: 0px; overflow-y: hidden; overflow-x: scroll; }
+.CodeMirror-scrollbar-filler { right: 0px; bottom: 0px; }
+.CodeMirror-gutter-filler { left: 0px; bottom: 0px; }
+.CodeMirror-gutters { position: absolute; left: 0px; top: 0px; padding-bottom: 30px; z-index: 3; }
+.CodeMirror-gutter { white-space: normal; height: 100%; box-sizing: content-box; padding-bottom: 30px; margin-bottom: -32px; display: inline-block; }
+.CodeMirror-gutter-elt { position: absolute; cursor: default; z-index: 4; }
+.CodeMirror-lines { cursor: text; }
+.CodeMirror pre { border-radius: 0px; border-width: 0px; background: transparent; font-family: inherit; font-size: inherit; margin: 0px; white-space: pre; word-wrap: normal; color: inherit; z-index: 2; position: relative; overflow: visible; }
+.CodeMirror-wrap pre { word-wrap: break-word; white-space: pre-wrap; word-break: normal; }
+.CodeMirror-code pre { border-right: 30px solid transparent; width: fit-content; }
+.CodeMirror-wrap .CodeMirror-code pre { border-right: none; width: auto; }
+.CodeMirror-linebackground { position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px; z-index: 0; }
+.CodeMirror-linewidget { position: relative; z-index: 2; overflow: auto; }
+.CodeMirror-widget { }
+.CodeMirror-wrap .CodeMirror-scroll { overflow-x: hidden; }
+.CodeMirror-measure { position: absolute; width: 100%; height: 0px; overflow: hidden; visibility: hidden; }
+.CodeMirror-measure pre { position: static; }
+.CodeMirror div.CodeMirror-cursor { position: absolute; visibility: hidden; border-right: none; width: 0px; }
+.CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+.CodeMirror-focused div.CodeMirror-cursor { visibility: inherit; }
+.CodeMirror-selected { background: rgb(217, 217, 217); }
+.CodeMirror-focused .CodeMirror-selected { background: rgb(215, 212, 240); }
+.cm-searching { background: rgba(255, 255, 0, 0.4); }
+.CodeMirror span { }
+@media print {
+  .CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+}
+.CodeMirror-lint-markers { width: 16px; }
+.CodeMirror-lint-tooltip { background-color: infobackground; border: 1px solid black; border-radius: 4px; color: infotext; font-family: monospace; overflow: hidden; padding: 2px 5px; position: fixed; white-space: pre-wrap; z-index: 10000; max-width: 600px; opacity: 0; transition: opacity 0.4s; font-size: 0.8em; }
+.CodeMirror-lint-mark-error, .CodeMirror-lint-mark-warning { background-position: left bottom; background-repeat: repeat-x; }
+.CodeMirror-lint-mark-error { background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAYAAAC09K7GAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9sJDw4cOCW1/KIAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAAHElEQVQI12NggIL/DAz/GdA5/xkY/qPKMDAwAADLZwf5rvm+LQAAAABJRU5ErkJggg=="); }
+.CodeMirror-lint-marker-error, .CodeMirror-lint-marker-warning { background-position: center center; background-repeat: no-repeat; cursor: pointer; display: inline-block; height: 16px; width: 16px; vertical-align: middle; position: relative; }
+.CodeMirror-lint-message-error, .CodeMirror-lint-message-warning { padding-left: 18px; background-position: left top; background-repeat: no-repeat; }
+.CodeMirror-lint-marker-error, .CodeMirror-lint-message-error { background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAHlBMVEW7AAC7AACxAAC7AAC7AAAAAAC4AAC5AAD///+7AAAUdclpAAAABnRSTlMXnORSiwCK0ZKSAAAATUlEQVR42mWPOQ7AQAgDuQLx/z8csYRmPRIFIwRGnosRrpamvkKi0FTIiMASR3hhKW+hAN6/tIWhu9PDWiTGNEkTtIOucA5Oyr9ckPgAWm0GPBog6v4AAAAASUVORK5CYII="); }
+.CodeMirror-lint-marker-warning, .CodeMirror-lint-message-warning { background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAANlBMVEX/uwDvrwD/uwD/uwD/uwD/uwD/uwD/uwD/uwD6twD/uwAAAADurwD2tQD7uAD+ugAAAAD/uwDhmeTRAAAADHRSTlMJ8mN1EYcbmiixgACm7WbuAAAAVklEQVR42n3PUQqAIBBFUU1LLc3u/jdbOJoW1P08DA9Gba8+YWJ6gNJoNYIBzAA2chBth5kLmG9YUoG0NHAUwFXwO9LuBQL1giCQb8gC9Oro2vp5rncCIY8L8uEx5ZkAAAAASUVORK5CYII="); }
+.CodeMirror-lint-marker-multiple { background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAMAAADzjKfhAAAACVBMVEUAAAAAAAC/v7914kyHAAAAAXRSTlMAQObYZgAAACNJREFUeNo1ioEJAAAIwmz/H90iFFSGJgFMe3gaLZ0od+9/AQZ0ADosbYraAAAAAElFTkSuQmCC"); background-repeat: no-repeat; background-position: right bottom; width: 100%; height: 100%; }
+
+
+html { font-size: 14px; background-color: rgb(255, 255, 255); color: rgb(51, 51, 51); }
+body { margin: 0px; padding: 0px; height: auto; bottom: 0px; top: 0px; left: 0px; right: 0px; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { background: rgb(181, 214, 252); text-shadow: none; }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; word-wrap: break-word; position: relative; padding-bottom: 70px; white-space: pre-wrap; overflow-x: auto; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+.typora-export #write { margin: 0px auto; }
+#write > p:first-child, #write > ul:first-child, #write > ol:first-child, #write > pre:first-child, #write > blockquote:first-child, #write > div:first-child, #write > table:first-child { margin-top: 30px; }
+#write li > table:first-child { margin-top: -20px; }
+img { max-width: 100%; vertical-align: middle; }
+input, button, select, textarea { color: inherit; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+::before, ::after, * { box-sizing: border-box; }
+#write p, #write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write div, #write pre { width: inherit; }
+#write p, #write h1, #write h2, #write h3, #write h4, #write h5, #write h6 { position: relative; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+p { -webkit-margin-before: 1rem; -webkit-margin-after: 1rem; -webkit-margin-start: 0px; -webkit-margin-end: 0px; }
+.mathjax-block { margin-top: 0px; margin-bottom: 0px; -webkit-margin-before: 0rem; -webkit-margin-after: 0rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: bold; font-style: italic; }
+a { cursor: pointer; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; margin: 4px 0px 0px; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 80px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+pre { white-space: pre-wrap; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-diagram-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+.md-fences .CodeMirror.CodeMirror-wrap { top: -1.6em; margin-bottom: -1.6em; }
+.md-fences.mock-cm { white-space: pre-wrap; }
+.show-fences-line-number .md-fences { padding-left: 0px; }
+.show-fences-line-number .md-fences.mock-cm { padding-left: 40px; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; padding-top: 1em; padding-bottom: 1em; }
+.footnotes + .footnotes { margin-top: -1em; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: transparent; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: normal; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li p, li .mathjax-block { margin: 0.5rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; }
+@media print {
+  html, body { height: 100%; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  h1, h2, h3, h4, h5, h6 { break-after: avoid-page; orphans: 2; }
+  p { orphans: 4; }
+  html.blink-to-pdf { font-size: 13px; }
+  .typora-export #write { padding-left: 1cm; padding-right: 1cm; }
+  .typora-export #write::after { height: 0px; }
+  @page { margin: 20mm 0mm; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 2.86rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p .md-image:only-child { display: inline-block; width: 100%; text-align: center; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.mathjax-block { white-space: pre; overflow: hidden; width: 100%; }
+p + .mathjax-block { margin-top: -1.143rem; }
+.mathjax-block:not(:empty)::after { display: none; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus { outline: none; box-shadow: none; }
+.task-list { list-style-type: none; }
+.task-list-item { position: relative; padding-left: 1em; }
+.task-list-item input { position: absolute; top: 0px; left: 0px; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc::after, .md-toc-content::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); text-decoration: none; }
+.md-toc-inner:hover { }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: bold; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+.md-tag { opacity: 0.5; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.8; font-family: monospace; }
+code { text-align: left; }
+h1 .md-tag, h2 .md-tag, h3 .md-tag, h4 .md-tag, h5 .md-tag, h6 .md-tag { font-weight: initial; opacity: 0.35; }
+a.md-print-anchor { border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: none !important; background: transparent !important; text-decoration: initial !important; text-shadow: initial !important; }
+.md-inline-math .MathJax_SVG .noError { display: none !important; }
+.mathjax-block .MathJax_SVG_Display { text-align: center; margin: 1em 0em; position: relative; text-indent: 0px; max-width: none; max-height: none; min-height: 0px; min-width: 100%; width: auto; display: block !important; }
+.MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display { width: auto; margin: inherit; display: inline-block !important; }
+.MathJax_SVG .MJX-monospace { font-family: monospace; }
+.MathJax_SVG .MJX-sans-serif { font-family: sans-serif; }
+.MathJax_SVG { display: inline; font-style: normal; font-weight: normal; line-height: normal; zoom: 90%; text-indent: 0px; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0px; min-height: 0px; border: 0px; padding: 0px; margin: 0px; }
+.MathJax_SVG * { transition: none; }
+
+
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: normal; src: local("Open Sans Regular"), url("./github/400.woff") format("woff"); }
+@font-face { font-family: "Open Sans"; font-style: italic; font-weight: normal; src: local("Open Sans Italic"), url("./github/400i.woff") format("woff"); }
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: bold; src: local("Open Sans Bold"), url("./github/700.woff") format("woff"); }
+@font-face { font-family: "Open Sans"; font-style: italic; font-weight: bold; src: local("Open Sans Bold Italic"), url("./github/700i.woff") format("woff"); }
+html { font-size: 16px; }
+body { font-family: "Open Sans", "Clear Sans", "Helvetica Neue", Helvetica, Arial, sans-serif; color: rgb(51, 51, 51); line-height: 1.6; }
+#write { max-width: 1023px; margin: 0px auto; padding: 20px 20px 100px; }
+#write > ul:first-child, #write > ol:first-child { margin-top: 30px; }
+body > :first-child { margin-top: 0px !important; }
+body > :last-child { margin-bottom: 0px !important; }
+a { color: rgb(65, 131, 196); }
+h1, h2, h3, h4, h5, h6 { position: relative; margin-top: 1rem; margin-bottom: 1rem; font-weight: bold; line-height: 1.4; cursor: text; }
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor { text-decoration: none; }
+h1 tt, h1 code { font-size: inherit; }
+h2 tt, h2 code { font-size: inherit; }
+h3 tt, h3 code { font-size: inherit; }
+h4 tt, h4 code { font-size: inherit; }
+h5 tt, h5 code { font-size: inherit; }
+h6 tt, h6 code { font-size: inherit; }
+h1 { padding-bottom: 0.3em; font-size: 2.25em; line-height: 1.2; border-bottom: 1px solid rgb(238, 238, 238); }
+h2 { padding-bottom: 0.3em; font-size: 1.75em; line-height: 1.225; border-bottom: 1px solid rgb(238, 238, 238); }
+h3 { font-size: 1.5em; line-height: 1.43; }
+h4 { font-size: 1.25em; }
+h5 { font-size: 1em; }
+h6 { font-size: 1em; color: rgb(119, 119, 119); }
+p, blockquote, ul, ol, dl, table { margin: 0.8em 0px; }
+li > ol, li > ul { margin: 0px; }
+hr { height: 4px; padding: 0px; margin: 16px 0px; background-color: rgb(93, 173, 226); border-width: 0px 0px 1px; border-style: none none solid; border-top-color: initial; border-right-color: initial; border-left-color: initial; border-image: initial; overflow: hidden; box-sizing: content-box; border-bottom-color: rgb(221, 221, 221); }
+body > h2:first-child { margin-top: 0px; padding-top: 0px; }
+body > h1:first-child { margin-top: 0px; padding-top: 0px; }
+body > h1:first-child + h2 { margin-top: 0px; padding-top: 0px; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child { margin-top: 0px; padding-top: 0px; }
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 { margin-top: 0px; padding-top: 0px; }
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p { margin-top: 0px; }
+li p.first { display: inline-block; }
+ul, ol { padding-left: 30px; }
+ul:first-child, ol:first-child { margin-top: 0px; }
+ul:last-child, ol:last-child { margin-bottom: 0px; }
+blockquote { border-left: 5px solid rgb(255, 195, 0); padding: 0px 15px; color: rgb(23, 32, 42); }
+blockquote blockquote { padding-right: 0px; }
+table { padding: 0px; }
+table tr { border-top: 1px solid rgb(204, 204, 204); background-color: white; margin: 0px; padding: 0px; }
+table tr:nth-child(2n) { background-color: rgb(248, 248, 248); }
+table tr th { font-weight: bold; border: 1px solid rgb(204, 204, 204); text-align: left; margin: 0px; padding: 6px 13px; }
+table tr td { border: 1px solid rgb(204, 204, 204); text-align: left; margin: 0px; padding: 6px 13px; }
+table tr th:first-child, table tr td:first-child { margin-top: 0px; }
+table tr th:last-child, table tr td:last-child { margin-bottom: 0px; }
+.CodeMirror-gutters { border-right: 1px solid rgb(221, 221, 221); }
+.md-fences, code, tt { border: 2px solid rgb(221, 221, 221); background-color: rgb(218, 247, 166); border-radius: 3px; font-family: Consolas, "Liberation Mono", Courier, monospace; font-weight: bold; padding: 2px 4px 0px; font-size: 1.1em; }
+.md-fences { margin-bottom: 15px; margin-top: 15px; padding: 8px 1em 6px; }
+.task-list { padding-left: 0px; }
+.task-list-item { padding-left: 32px; }
+.task-list-item input { top: 3px; left: 8px; }
+@media screen and (min-width: 914px) {
+}
+@media print {
+  html { font-size: 13px; }
+  table, pre { break-inside: avoid; }
+  pre { word-wrap: break-word; }
+}
+.md-fences { background-color: rgb(248, 248, 248); }
+#write pre.md-meta-block { padding: 1rem; font-size: 85%; line-height: 1.45; background-color: rgb(247, 247, 247); border: 0px; border-radius: 3px; color: rgb(119, 119, 119); margin-top: 0px !important; }
+.mathjax-block > .code-tooltip { bottom: 0.375rem; }
+#write > h3.md-focus::before { left: -1.5625rem; top: 0.375rem; }
+#write > h4.md-focus::before { left: -1.5625rem; top: 0.285714rem; }
+#write > h5.md-focus::before { left: -1.5625rem; top: 0.285714rem; }
+#write > h6.md-focus::before { left: -1.5625rem; top: 0.285714rem; }
+.md-image > .md-meta { border: 1px solid rgb(221, 221, 221); background-color: rgb(248, 248, 248); border-radius: 3px; font-family: Consolas, "Liberation Mono", Courier, monospace; padding: 2px 4px 0px; font-size: 0.9em; color: inherit; }
+.md-tag { color: inherit; }
+.md-toc { margin-top: 20px; padding-bottom: 20px; }
+#typora-quick-open { border: 1px solid rgb(221, 221, 221); background-color: rgb(248, 248, 248); }
+#typora-quick-open-item { background-color: rgb(250, 250, 250); border-color: rgb(254, 254, 254) rgb(229, 229, 229) rgb(229, 229, 229) rgb(238, 238, 238); border-style: solid; border-width: 1px; }
+.on-focus-mode blockquote { border-left-color: rgba(85, 85, 85, 0.117647); }
+
+
+
+
+
+
+</style>
+</head>
+<body class='typora-export' >
+<div  id='write'  class = 'is-node'><h1><a name='header-c423' class='md-header-anchor '></a>Stimulus calibration</h1><div class='md-toc' mdtype='toc'><p class="md-toc-content"><span class="md-toc-item md-toc-h1" data-ref="c423"><a class="md-toc-inner" href="#header-c423">Stimulus calibration</a></span><span class="md-toc-item md-toc-h2" data-ref="c426"><a class="md-toc-inner" href="#header-c426">Overview</a></span><span class="md-toc-item md-toc-h4" data-ref="c427"><a class="md-toc-inner" href="#header-c427">Principle</a></span><span class="md-toc-item md-toc-h4" data-ref="c448"><a class="md-toc-inner" href="#header-c448">Calibration in  4 steps:</a></span><span class="md-toc-item md-toc-h2" data-ref="c471"><a class="md-toc-inner" href="#header-c471">Hardware</a></span><span class="md-toc-item md-toc-h4" data-ref="c474"><a class="md-toc-inner" href="#header-c474">Photometer</a></span><span class="md-toc-item md-toc-h4" data-ref="c492"><a class="md-toc-inner" href="#header-c492">Arduino UNO Broad assembling</a></span><span class="md-toc-item md-toc-h4" data-ref="c523"><a class="md-toc-inner" href="#header-c523">Assembling</a></span><span class="md-toc-item md-toc-h2" data-ref="c585"><a class="md-toc-inner" href="#header-c585">Software</a></span><span class="md-toc-item md-toc-h4" data-ref="c600"><a class="md-toc-inner" href="#header-c600">Preparation for calibration</a></span><span class="md-toc-item md-toc-h5" data-ref="c601"><a class="md-toc-inner" href="#header-c601">Part A: SimpleAIRecorder.ino</a></span><span class="md-toc-item md-toc-h5" data-ref="c629"><a class="md-toc-inner" href="#header-c629">Part  B. Calibration.ino Might be different in the other setup</a></span><span class="md-toc-item md-toc-h5" data-ref="c658"><a class="md-toc-inner" href="#header-c658">Part C. iPython notebook</a></span><span class="md-toc-item md-toc-h2" data-ref="c699"><a class="md-toc-inner" href="#header-c699">Run Calibration Measurement</a></span><span class="md-toc-item md-toc-h2" data-ref="c727"><a class="md-toc-inner" href="#header-c727">FAQ</a></span><span class="md-toc-item md-toc-h5" data-ref="c728"><a class="md-toc-inner" href="#header-c728">Q: The readout of photometer is not stable or too small</a></span><span class="md-toc-item md-toc-h5" data-ref="c742"><a class="md-toc-inner" href="#header-c742">Q: The photometer's readout is out of range</a></span><span class="md-toc-item md-toc-h5" data-ref="c752"><a class="md-toc-inner" href="#header-c752">Q: Photometer turned itself off..</a></span><span class="md-toc-item md-toc-h5" data-ref="c756"><a class="md-toc-inner" href="#header-c756">Q: Takes forever to upload the Arduino sketches</a></span><span class="md-toc-item md-toc-h5" data-ref="c764"><a class="md-toc-inner" href="#header-c764">Q:  Arduino returns the error "access is denied...." when uploading the sketches to the port</a></span><span class="md-toc-item md-toc-h5" data-ref="c777"><a class="md-toc-inner" href="#header-c777">Q:  Random weird symbols instead of numbers displayed on the SimpleAIRecorder serial monitor</a></span><span class="md-toc-item md-toc-h5" data-ref="c781"><a class="md-toc-inner" href="#header-c781">Q:  A1 inputs shown in the serial monitor are out of range (e.g. A1 input = 1023) or stay at zero:</a></span><span class="md-toc-item md-toc-h5" data-ref="c796"><a class="md-toc-inner" href="#header-c796">Q: Error: "No module named 'simple_ai_recorder'" when running the 2nd code block</a></span><span class="md-toc-item md-toc-h5" data-ref="c800"><a class="md-toc-inner" href="#header-c800">Q: Error: "No module named 'serial'" when running the 2nd code block</a></span><span class="md-toc-item md-toc-h5" data-ref="c804"><a class="md-toc-inner" href="#header-c804">Q: Error: "[Errno 2] No such file or directory'" when running the 6/7/13th code block</a></span><span class="md-toc-item md-toc-h5" data-ref="c808"><a class="md-toc-inner" href="#header-c808">Q: No messages or plots returned after starting the calibration measurement (11th code block)</a></span><span class="md-toc-item md-toc-h5" data-ref="c818"><a class="md-toc-inner" href="#header-c818">Q: 'Error: Link not open' when running the 11th block</a></span><span class="md-toc-item md-toc-h5" data-ref="c822"><a class="md-toc-inner" href="#header-c822">Q: 'Error: list index out of range' when running the 12th block, no errors returned in the 11th block</a></span><span class="md-toc-item md-toc-h5" data-ref="c826"><a class="md-toc-inner" href="#header-c826">Q: 'Error: Less power levels recorded ...' in 12th block</a></span></p></div><h2><a name='header-c426' class='md-header-anchor '></a>Overview</h2><h4><a name='header-c427' class='md-header-anchor '></a>Principle</h4><ul><li><p><strong>What are we calibrating</strong> : <mark><strong>Power of LED emitted light</strong></mark> to make the <mark><strong>photoisomerization rate of mouse M and S opsin</strong></mark> to <strong>green</strong> and <strong>blue light stimulus</strong> respectively be <strong>the same</strong></p></li><li><p><strong>How do we calibrate </strong>:<br/></p><ul><li>Measure the <strong>input power</strong> and the <strong>light intensity</strong> (<code>I/O</code>) of LEDs</li><li>Calculate <strong>the relationships between the input power and the photo-isomerization rate</strong> of M and S opsins for green and blue LEDs from the LED <code>I/O</code></li><li><strong>Calibrate the input power</strong> accordingly</li></ul></li><li><p>See <a href='Calculating%20R%20star.doc'>Calculating R star</a> and the <strong>ipython notebook</strong> <code>stimulator_calibration_v4.ipynb</code> in the <a href='../documentation'>documentation folder</a> for more explanation.</p></li></ul><h4><a name='header-c448' class='md-header-anchor '></a>Calibration in  4 steps:</h4><ul><li>Collect the information of the <strong>spectrum</strong> of <strong>LED, LED filter, dichroic beam splitter</strong></li><li>Assemble the hardware for LED <code>I/O</code> measurement → see <a href='#header-c471'>Hardware</a></li><li>Upload the <strong>ipython notebook</strong> and <strong>Arduino sketches</strong> for LED measurement and plotting the relationships between the input power and the photoisomerization rate → see <a href='#header-c585'>Software</a></li><li>Run the <strong>ipython notebook</strong> and get the plots, and adjust the input power accordingly → see <a href='#header-c699'>Run Calibration Measurement</a></li><li>Usually the calibration can be done within 5-10 mins, read <a href='#header-c727'>FAQ</a> if you got some unexpected problems</li></ul><blockquote><p><strong>Note</strong>: I have only tried the calibration on Setup 1. The procedures <strong>might need to be done differently for the other setups are <mark>highlighted</mark></strong>.</p></blockquote><p></p><hr /><h2><a name='header-c471' class='md-header-anchor '></a>Hardware</h2><p></p><h4><a name='header-c474' class='md-header-anchor '></a>Photometer</h4><ul><li><p>Power Cable for photometer <strong>(Label <code>1</code>)</strong>: </p><blockquote><p><img src="pic\IMG_4951.PNG" height="300px"> </p></blockquote><p>​</p></li><li><p>Others:</p><blockquote><p><img src="pic\IMG_4957.PNG" height="400px"> </p></blockquote></li></ul><p></p><h4><a name='header-c492' class='md-header-anchor '></a>Arduino UNO Broad assembling</h4><ul><li><p><code>UNO</code> Broad: </p><blockquote><p><img src="pic\IMG_4956.PNG" width="400px"> </p></blockquote></li><li><p>Cable <code>[2]</code> (for trigger input) with two thin cables <code>A0</code> and <code>GND</code>:</p><blockquote><p><img src="pic\IMG_4954.PNG" width="300px"> </p><p><img src="pic\IMG_4955.PNG" width="300px"> </p></blockquote></li><li><p>Cable <code>[3]</code> for photometer input with two thin cables <code>A1</code> and <code>GND</code>:</p><blockquote><p><img src="pic\IMG_4952.PNG" width="300px"> </p><p><img src="pic\IMG_4953.PNG" width="300px"> </p></blockquote></li><li><p><code>USB</code> cable: </p><blockquote><p><img src="pic\20170312_145124000_iOS.PNG" width="300px"> </p></blockquote></li></ul><h4><a name='header-c523' class='md-header-anchor '></a>Assembling</h4><ul><li><p>Connect <code>USB</code> to the <strong>port on Arduino broad</strong> and <strong>on PC</strong></p></li><li><p>Connect the thin cables with <code>GND</code> label  to  the <mark>GND</mark> ports on <code>UNO</code>(<em>GND: Ground</em>)</p></li><li><p>Connect the thin cables <code>A0</code> (on Cable [2]) and <code>A1</code>(on Cable [3]) to the <mark>A0</mark> and  <mark>A1</mark> ports on <code>UNO</code> respectively: </p><blockquote><p><img src="pic\IMG_4962.PNG" height="400px"><br/></p></blockquote></li><li><p>Connect the other end of Cable <code>[2]</code> to <strong>the port for trigger channel</strong> </p><blockquote><p><mark><strong>I have only labeled the trigger channel port for Setup 1</strong></mark>, you need to find out the right port for the other setups</p></blockquote></li><li><p>Assemble the photometer: Plug in Cable <code>[1]</code> and <code>[3]</code>:</p><blockquote><p><img src="pic\IMG_4963.PNG" height="400px"> </p></blockquote></li><li><p>Switch on the photometer, check the <strong>data sampling rate</strong> (set to 20 pts/sec, can be higher):</p><blockquote><p><img src="pic\IMG_4786.PNG" height="300px"> </p></blockquote></li><li><p>Turn on the <strong>analog output</strong>:</p><blockquote><p><img src="pic\IMG_4788.PNG" height="300px"> </p></blockquote></li><li><p>Turn on green and blue LED, <strong>turn off infrared LED</strong> to avoid any interference :</p><blockquote><p><img src="pic\IMG_4972.PNG" height="200px">     <mark>Might be different in the other setup</mark> </p></blockquote></li><li><p><strong>Adjust the condenser</strong> (below the microscope chamber) so the photometer can get max light input: </p><blockquote><p><img src="pic\IMG_4981.PNG" height="200px">   <mark>Might be different in the other setup</mark>  <br/></p></blockquote></li><li><p><strong>Expose the photometer sensor</strong> and <strong>place the photometer sensor area in the centre of the chamber</strong>. <strong>Measure in dark</strong> to avoid the interference of other light sources:</p><blockquote><p><img src="pic\IMG_4984.PNG" height="150px"> </p></blockquote><blockquote><p><img src="pic\IMG_4985.PNG" height="300px"> </p></blockquote></li></ul><p></p><hr /><h2><a name='header-c585' class='md-header-anchor '></a>Software</h2><ul><li>General: <strong>Igor, jupyter notebook, python, pyserial python module</strong></li><li>The iPython notebook <code>stimulator_calibration_v4.ipynb</code> in the <a href='../softwares'>&quot;softwares&quot;</a>  folder</li><li><code>SimpleAIRecorder.ino</code> in the <a href='../softwares/arduino/SimpleAIRecorder'>&quot;arduino&quot; </a> folder</li><li><code>Calibration.ino</code> in the <a href='../softwares/calibration'>&quot;calibration&quot;</a> folder (<mark>if your LED is controlled by Arduino broad</mark>)</li></ul><h4><a name='header-c600' class='md-header-anchor '></a>Preparation for calibration</h4><h5><a name='header-c601' class='md-header-anchor '></a>Part A: SimpleAIRecorder.ino</h5><ul><li><p>This sketch file returns the trigger time and light intensity data to PC so the iPython notebook can access the data for calibration.</p></li><li><p>Open and upload the <code>SimpleAIRecorder.ino</code> sketch to <code>UNO</code> broad in Arduino IDE, <mark><strong>before you upload</strong></mark>, make sure:</p><blockquote><p><strong>Board type:</strong> <code>UNO</code></p><p><strong>Port</strong>: <code>COM... (Arduino Uno)</code>  (usually <code>COM9 (Arduino Uno)</code> but can be changed sometimes) <img src="pic\IMG_4966.PNG" height="200px"></p></blockquote></li><li><p>Open the <code>serial monitor</code> (the rightmost icon on the image above) and switch baud to <code>115200 baud</code>, you should see something like this:</p><blockquote><p><img src="pic\IMG_4967.PNG" height="200px"> </p></blockquote><blockquote><ul><li>For each line from left to right: <strong>time (ms)</strong>, <strong>measuring rate (µs)</strong>, <strong>A0 (trigger) input</strong>, <strong>A1 (photometer) input</strong></li><li>Switch on the photometer and see if the A1 input returns nonzero number, if not, check if you assembled everything correctly.</li></ul></blockquote></li></ul><h5><a name='header-c629' class='md-header-anchor '></a>Part  B. Calibration.ino <mark>Might be different in the other setup</mark></h5><ul><li><p>This sketch file contains <strong>the calibration stimuli for green and blue LEDs</strong> which allow to measure the power for a series of light levels applied to the different LEDs in sequence</p></li><li><p>Switch on the <strong>microcontroller</strong> and open <strong>Igor</strong>,  set a configuration and start to scan (<mark>otherwise the LEDs won&#39;t response</mark>)</p></li><li><p>Upload the <code>Calibration.ino</code> sketch to <strong>LED controlling Arduino broad</strong>, again <strong>check the broad type and the port</strong></p><blockquote><p>In <mark><strong>Setup 1</strong></mark> the broad type is <code>Duemilanove</code> and the port name is <code>COM6</code>.      <br/></p></blockquote></li><li><p>Open the serial monitor for the <code>Calibration.ino</code> sketch, set <strong>green</strong> or <strong>blue LEDs to maximum</strong> (commands =  <code>2</code> and <code>4</code> respectively ) in turns to <strong>adjust the measuring range of the photometer to a reasonable range</strong>:</p><blockquote><ul><li>Make sure you change the <strong>measuring wavelength of the photometer</strong> (<code>λ</code> on the photometer panel) to the corresponding green and blue light wavelength and <strong>&#39;Zero&#39;</strong> the photometer before every measurement.</li><li><strong>Make sure you set the LED you are not measuring to minimum level</strong> (<code>1</code> for green LED, <code>3</code> for blue)</li></ul></blockquote></li><li><p>Play a white flash stimuli (command =  <code>8</code>) and see if the change of the <strong>A0</strong> and <strong>A1</strong> values returned in the <strong>serial monitor for SimpleAIRecorder sketch</strong> match the stimuli.</p></li></ul><h5><a name='header-c658' class='md-header-anchor '></a>Part C. iPython notebook</h5><ul><li><p>Type <code>jupyter notebook</code> in <mark>Windows Powershell</mark>, which should open the <strong>Home page</strong> of the notebook. Upload the iPython notebook and open it in a new tab.</p></li><li><p>The notebook contains <strong>the script for calibration</strong> and also <strong>detailed explanation of the reasons and principles of the calibration</strong> which I would highly recommend to read through before your first calibration.</p></li><li><p>The following parameters are required by the script and you need to know them all before the calibration:</p><ul><li><p><strong>LEDs and LED filters spectrum</strong></p><blockquote><p><mark>For Setup 1</mark>, a narrow filter is used therefore only the peak and the bandwidth of the LED/filter spectrum )</p><p><mark>For the other setup</mark>, .txt files of the spectrum can be found in the <a href='C:/Users/Timm/Desktop/Nash%20stuff/stimulator_calibration/data'>data</a> folder (e.g. &quot;F73-063_z400-580-890.txt&quot;)</p></blockquote></li><li><p><strong>Spectrum of dichroic beam splitter</strong>:</p><blockquote><p><mark>For setup 1 not needed</mark>, because the spectrum of the beam splitter is mostly overlapped  with the spectrum of the two LEDs</p></blockquote></li><li><p><strong>Mouse M and S Opsin spectrum</strong>: &quot;mouse_cone_opsins.txt&quot; in the <a href='../softwares'>software</a> folder</p></li></ul></li><li><p>The paths: <code>script_path</code> and <code>pathData</code>In the <strong>2nd and 3rd python code block</strong> of the notebook are the path where your <strong>ipython notebook, mouse opsin spectrum and LED/filters spectrum files</strong> are located respectively. <code>pathData</code> is also the path<strong>to save all the calibration measurements</strong></p></li><li><p>In the <strong>10th code block</strong> (<strong>Read calibration data</strong>), change the <code>comPortName</code> if it does not match with the port name of the <code>UNO</code> <strong>Arduino broad</strong>. </p></li><li><p>The <code>calFileName</code> is the <strong>file name for the next calibration measurement</strong>, <mark>change it every time before you start a new measurement, otherwise no data will be saved</mark>.</p></li></ul><p></p><hr /><h2><a name='header-c699' class='md-header-anchor '></a>Run Calibration Measurement</h2><ol start='' ><li>Run the <strong>11th code block</strong> in the notebook, and you should see the following:</li></ol><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>Illuminated area is 1.963 mm2
+Prepare to measure LED `green` and press Enter to continue...</pre></blockquote><ol start='2' ><li><p><strong>Set the measuring wavelength of the photometer to the peak of the corresponding LED spectrum</strong> (e.g. in setup 1, measuring wavelength for green LED should be set to 578)</p></li><li><p>In <strong>the serial monitor window for the <code>Calibration.ino</code> sketch</strong>, type <code>g</code> which is the <mark>command for green LED calibration measurement</mark>.</p></li><li><p>Wait until seen this:</p><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>Illuminated area is 1.963 mm2
+Prepare to measure LED `green` and press Enter to continue...
+Opened serial port COM6 at 115200 baud
+Sampling rate is 5.001 ms
+56.000 s duration = 11198 samples
+100% done                                        
+SUCCESS
+11198 data points recorded
+Rate = 5.000 +/- 0.001 ms
+Closed serial port COM6
+Prepare to measure LED `blue` and press Enter to continue...</pre></blockquote></li><li><p>Repeat <strong>Step 2 and 3</strong> for the other LED (type <code>b</code> for blue LED calibration measurement). </p></li><li><p>Run the rest of the script until you get <strong>the plot of photoisomerization rates for each LED/filter vs. photoreceptor combination</strong></p></li></ol><p></p><hr /><h2><a name='header-c727' class='md-header-anchor '></a>FAQ</h2><h5><a name='header-c728' class='md-header-anchor '></a>Q: The readout of photometer is not stable or too small</h5><blockquote><p>a. Make sure the cables are not broken. </p><p>b. examine <strong>the connection between the photometer calibration module and the photometer device</strong> (where your photometer sensor connect to the device)</p><p>c. Adjust the condenser and the position of the photometer sensor to make sure the sensor can receive the maximum output</p><p>d. Adjust the scale of the photometer to a reasonable range</p><p>e. Make sure you <strong>take off the cap and pull down the filter to really expose the photometer sensor</strong></p><p>f. Check if the hardwares are wired correctly (e.g. <code>A0</code>,<code>A1</code>,<code>GND</code> really connect to the right ports). Make sure you don&#39;t shunt anything</p></blockquote><h5><a name='header-c742' class='md-header-anchor '></a>Q: The photometer&#39;s readout is out of range</h5><blockquote><p>a. Make sure the sensor is placed in dark so <strong>no other light source</strong> can interfere the photometer measurement.</p><p>b. Adjust the scale of the photometer to a reasonable range</p><p>c. Check the wiring and make sure you don&#39;t shunt anything</p><p>d. Check if <strong>the IR-LED has been turned off</strong></p></blockquote><h5><a name='header-c752' class='md-header-anchor '></a>Q: Photometer turned itself off..</h5><blockquote><p>Plug in the power cable ... (one stupid mistake I repeatedly made)</p></blockquote><h5><a name='header-c756' class='md-header-anchor '></a>Q: Takes forever to upload the Arduino sketches</h5><blockquote><p>a. Check if you select the <strong>correct broad type</strong> and <strong>ports</strong> on the Arduino IDE</p><p>b. Check your <strong>firewall settings</strong> and open and upload with the administrator permission</p><p>b. Check if you can successfully compile your sketches</p></blockquote><h5><a name='header-c764' class='md-header-anchor '></a>Q:  Arduino returns the error &quot;access is denied....&quot; when uploading the sketches to the port</h5><blockquote><blockquote><p>The Arduino broad has been occupied by some other processes (usually the ipython notebook and the python functions it called), you must release it before uploading the sketch.</p></blockquote><p>a. <strong>Restart your ipython notebook</strong></p><p>b. <strong>End the python processes</strong></p><p>c. Reboot your Arduino broad by re-plugging in the USB cable</p><p>d. Restart the PC</p></blockquote><h5><a name='header-c777' class='md-header-anchor '></a>Q:  Random weird symbols instead of numbers displayed on the SimpleAIRecorder serial monitor</h5><blockquote><p>Switch baud to <code>115200 baud</code></p></blockquote><h5><a name='header-c781' class='md-header-anchor '></a>Q:  A1 inputs shown in the serial monitor are out of range (e.g. A1 input = 1023) or stay at zero:</h5><blockquote><blockquote><p><strong>A1 inputs should be in the range from 0 to 999.</strong></p></blockquote><p>a. Check if the <code>A1</code>/<code>A0</code> cables are <strong>mistakenly plugged into the wrong port</strong> on the <code>UNO</code> Arduino broad.</p><p>b. Check if the <strong>analog output</strong> of the photometer has not been turned on</p><p>c.  Make sure Cable <code>[2]</code> is connected to the photometer device.</p><p>d. Make sure you have turned on the LEDs (<mark><strong>please don&#39;t directly stared at the blue and UV LEDs</strong></mark>)</p><p>d. <strong>Turn on the microcontroller, open Igor and start recording</strong></p></blockquote><h5><a name='header-c796' class='md-header-anchor '></a>Q: Error: &quot;No module named &#39;simple_ai_recorder&#39;&quot; when running the 2nd code block</h5><blockquote><p>Check if you can find  <strong>simple_ai_recorder.py</strong>  under the <code>script_path</code> you defined</p></blockquote><h5><a name='header-c800' class='md-header-anchor '></a>Q: Error: &quot;No module named &#39;serial&#39;&quot; when running the 2nd code block</h5><blockquote><p>Open <strong>Windows powershell</strong>, type <code>pip install pyserial</code> and return, wait until the installation finished</p></blockquote><h5><a name='header-c804' class='md-header-anchor '></a>Q: Error: &quot;[Errno 2] No such file or directory&#39;&quot; when running the 6/7/13th code block</h5><blockquote><p>Check if the <strong>&quot;mouse_cone_opsins.txt&quot;</strong> and your <strong>spectrum files</strong> is under the <code>script_path</code> and the <code>pathdata</code> you defined</p></blockquote><h5><a name='header-c808' class='md-header-anchor '></a>Q: No messages or plots returned after starting the calibration measurement (11th code block)</h5><blockquote><p>This can be due to many reasons, here I picked the most common ones:</p><p>a. <code>comPortName</code> does not match with the port name of the <code>UNO</code> <strong>Arduino broad</strong>.</p><p>b. The current python kernel is occupied by some other processes, <strong>restart the kernel</strong>.</p><p>c.  Check the <code>A0</code>/<code>A1</code>/<code>GND</code> connection and make sure you don&#39;t shunt anything</p></blockquote><h5><a name='header-c818' class='md-header-anchor '></a>Q: &#39;Error: Link not open&#39; when running the 11th block</h5><blockquote><p>Usually caused by the connection problems between the <code>Uno</code> broad, the photometer and the PC. Check if you assemble the hardware correctly and you don&#39;t shunt anything</p></blockquote><h5><a name='header-c822' class='md-header-anchor '></a>Q: &#39;Error: list index out of range&#39; when running the 12th block, no errors returned in the 11th block</h5><blockquote><p>Check if the <code>A1</code>/<code>A0</code> cables are <strong>mistakenly plugged into the wrong port</strong> on the <code>UNO</code> Arduino broad.</p></blockquote><h5><a name='header-c826' class='md-header-anchor '></a>Q: &#39;Error: Less power levels recorded ...&#39; in 12th block</h5><blockquote><p>Check <strong>all the parameters in the 10th code block</strong>, e.g. <code>nLevels</code> if it&#39;s smaller or greater than the number of levels you measured</p></blockquote></div>
+</body>
+</html>
